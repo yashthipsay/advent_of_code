@@ -13,8 +13,8 @@ mod text_processing {
 }
 
 fn count_letters_and_numbers(text: &str) -> (usize, usize) {
-    let number_of_letters;
-    let number_of_numbers;
+    let number_of_letters: usize;
+    let number_of_numbers: usize;
     (number_of_letters, number_of_numbers);
 }
 
