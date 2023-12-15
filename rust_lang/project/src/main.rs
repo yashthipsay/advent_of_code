@@ -1,14 +1,27 @@
-use regex::Regex;
+ use std::num::ParseIntError;
 
-fn main() {
-    let re = Regex::new(r"^\d{4}-\d{2}-\d{2}$").unwrap();
-    println!("Hello, world!");
-}
+ enum OutOfRangeError {
+ 	TooLarge,
+ 	TooSmall,
+ 	NotEvenANumber,
+ }
+
+ impl From<ParseIntError> for OutOfRangeError {
+ 	fn from(_e: ParseIntError) -> Self {
+ 		Self::NotEvenANumber
+ 	}
+ }
+
+ fn string_to_int_in_range(s: String) -> Result<u32, OutOfRangeError> {
+ 	// Given: The u32::from_str_radix function returns Result<u32, ParseIntError>
+ 	let n: u32 = u32::from_str_radix(&s, 10)?;
+
+ 	match n {
+ 		n if n < 5 => Err(OutOfRangeError::TooSmall),
+ 		n if n > 100 => Err(OutOfRangeError::TooLarge),
+ 		n => Ok(n),
+ 	}
+ }
 
 
-mod math {
-    type Complex = (f64, f64);
-    pub fn sin(f: f64){ /* */}
-    pub fn cos(f: f64){}
-    pub fn tan(f: f64){}
-}
+ fn main(){}

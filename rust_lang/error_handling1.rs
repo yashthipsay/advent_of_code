@@ -1,17 +1,14 @@
 enum Option<T> {
-    None, 
+    None,
     Some(T),
 }
 
-fn main(){
-
-
+fn main() {
     let a_number = Some(7);
     match a_number {
         Some(7) => println!("number 7"),
-        _ => {},
+        _ => {}
     }
-
 
     let amount = vec!["one", "two", "three"];
 
@@ -21,7 +18,7 @@ fn main(){
     let second = amount.get(90);
     println!("second is {:?}", second);
 
-    for &index in [0, 2, 90].iter(){
+    for &index in [0, 2, 90].iter() {
         match amount.get(index) {
             Some(&"one") => println!("It's one."),
             Some(amount_name) => println!("It's a {}.", amount_name),
@@ -29,7 +26,5 @@ fn main(){
         }
     }
 
-   
-
-  assert_eq!(Some("one").unwrap_or("two"), "one")
+    assert_eq!(Some("one").unwrap_or("two"), "one")
 }
