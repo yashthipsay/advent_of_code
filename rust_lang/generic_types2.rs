@@ -42,28 +42,49 @@ impl Area for Rectangle {
 
 // ------------------------------------------------------------
 
-struct A;
-struct S(A);
-struct SGen<T>(T);
+// struct A;
+// struct S(A);
+// struct SGen<T>(T);
 
-fn reg_fn(_s:S) {}
+// fn reg_fn(_s:S) {}
 
 
-fn gen_spec_t(_s: SGen<A>) {}
+// fn gen_spec_t(_s: SGen<A>) {}
 
-fn gen_spec_t_i32(_s: SGen<i32>) {}
+// fn gen_spec_t_i32(_s: SGen<i32>) {}
 
-fn generic<T>(_s: SGen<T>) {}
+// fn generic<T>(_s: SGen<T>) {}
+
+// fn main() {
+//     reg_fn(S(A));
+//     gen_spec_t(SGen(A));
+//     gen_spec_i32(SGen(6));
+
+//     generic::<char>(SGen('a'));
+
+//     generic(SGen('a'));
+
+//     generic(SGen('c'));
+// }
+
+// ------------------------------------------------------------
+
+
+struct Empty;
+struct Null;
+
+trait DoubleDrop<T> {
+    fn double_drop(self, _: T);
+}
+
+impl<T, U> DoubleDrop<T> for U {
+    fn double_drop(self, _: T) {}
+}
 
 fn main() {
-    reg_fn(S(A));
-    gen_spec_t(SGen(A));
-    gen_spec_i32(SGen(6));
+    let empty = Empty;
+    let null = Null;
 
-    generic::<char>(SGen('a'));
-
-    generic(SGen('a'));
-
-    generic(SGen('c'));
+    empty.double_drop(null);
 }
 
